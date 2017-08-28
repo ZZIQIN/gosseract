@@ -65,6 +65,11 @@ func (c *Client) Image(img image.Image) *Client {
 	return c
 }
 
+// Delete remove the temp file
+func (c* Client) Delete() error{
+	return os.Remove(c.source)
+}
+
 // Out executes tesseract and gives results
 func (c *Client) Out() (out string, e error) {
 	if e = c.ready(); e != nil {
@@ -83,12 +88,12 @@ func (c *Client) Must(params map[string]string) (out string, e error) {
 	return c.Out()
 }
 func (c *Client) accept(params map[string]string) (e error) {
-	var ok bool
-	var src string
-	if src, ok = params["src"]; !ok {
+	src, ok := params["src"];
+	if oka {
+		c.source = path{src}
+	}else if c.source == "" {
 		return fmt.Errorf("Missing parameter `src`.")
 	}
-	c.source = path{src}
 	if digest, ok := params["digest"]; ok {
 		c.digest = path{digest}
 	}
