@@ -1,10 +1,8 @@
 package gosseract
 
 import "fmt"
-import "os"
 import "os/exec"
 import "bytes"
-import "io/ioutil"
 
 type tesseract2345 struct {
 	version        string
