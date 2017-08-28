@@ -18,14 +18,15 @@ func (t tesseract2345) Execute(params []string) (res string, e error) {
 	// command args
 	var args []string
 	// Register source file
-	args = append(args, params[0],"stdout")
+	args = append(args, params[0],"stdout","-l",params[1])
 
 	// Register digest file
-	if len(params) > 1 {
-		args = append(args, params[1])
+	if len(params) > 2 {
+		args = append(args, params[2])
 	}
 
 	// prepare command
+	fmt.Print(args)
 	cmd := exec.Command(TESSERACT, args...)
 	// execute
 	var stderr bytes.Buffer

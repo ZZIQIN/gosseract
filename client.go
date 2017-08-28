@@ -10,6 +10,7 @@ type Client struct {
 	tesseract tesseractCmd
 	source    path
 	digest    path
+	language  string
 	Error     error
 }
 type path struct {
@@ -94,6 +95,13 @@ func (c *Client) accept(params map[string]string) (e error) {
 	}else if c.source.Get() == "" {
 		return fmt.Errorf("Missing parameter `src`.")
 	}
+
+	if language, ok := params["language"]; ok {
+		c.language = language
+	}else{
+		c.language = "eng"
+	}
+
 	if digest, ok := params["digest"]; ok {
 		c.digest = path{digest}
 	}
@@ -108,6 +116,9 @@ func (c *Client) ready() (e error) {
 func (c *Client) execute() (res string, e error) {
 	args := []string{
 		c.source.Get(),
+	}
+	if c.language != "" {
+		args = append(args, c.language)
 	}
 	if c.digest.Ready() {
 		args = append(args, c.digest.Get())
