@@ -25,19 +25,19 @@ func getTesseractCmd() (tess tesseractCmd, e error) {
 		return
 	}
 	if regexp.MustCompile("^3.02").Match([]byte(v)) {
-		tess = tesseract0302{version: v, commandPath: commandPath}
+		tess = tesseract2345{version: v, commandPath: commandPath}
 		return
 	}
 	if regexp.MustCompile("^3.03").Match([]byte(v)) {
-		tess = tesseract0303{version: v, commandPath: commandPath}
+		tess = tesseract2345{version: v, commandPath: commandPath}
 		return
 	}
 	if regexp.MustCompile("^3.04").Match([]byte(v)) {
-		tess = tesseract0304{version: v, commandPath: commandPath}
+		tess = tesseract2345{version: v, commandPath: commandPath}
 		return
 	}
 	if regexp.MustCompile("^3.05").Match([]byte(v)) {
-		tess = tesseract0305{version: v, commandPath: commandPath}
+		tess = tesseract2345{version: v, commandPath: commandPath}
 		return
 	}
 	e = fmt.Errorf("No tesseract version is found, supporting 3.02~, 3.03~, 3.04~ and 3.05~")
